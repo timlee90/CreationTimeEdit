@@ -1,0 +1,23 @@
+# Date String convert credit to francishagyard2
+## https://community.spiceworks.com/topic/2232102-poweshell-how-convert-string-to-datetime
+
+set-location "C:\Citrix\profiles\win7"
+write-host
+
+$profile = "C:\Citrix\Profiles"
+$zip = "Win7.zip"
+$Folder = "Win7"
+$DestinationPath = "C:\Citrix\Profiles\Win7"
+
+Expand-Archive $profile\$zip -DestinationPath $DestinationPath 
+move-item -path $profile\$Folder\$Folder\* -destination $profile\$folder\ -force
+remove-item -path $profile\$Folder\$Folder\ -Recurse
+
+get-childitem | ? name -eq 1000 | Set-Itemproperty -name CreationTime -value (get-date).AddMonths(-1)
+get-childitem | ? name -eq 1001 | Set-Itemproperty -name CreationTime -value (get-date).AddMonths(-0)
+get-childitem | ? name -eq 1002 | Set-Itemproperty -name CreationTime -value (get-date).AddMonths(-3)
+get-childitem | ? name -eq 1003 | Set-Itemproperty -name CreationTime -value (get-date).AddMonths(-1)
+get-childitem | ? name -eq 1004 | Set-Itemproperty -name CreationTime -value (get-date).AddMonths(-0)
+get-childitem | ? name -eq 1005 | Set-Itemproperty -name CreationTime -value (get-date).AddMonths(-3)
+
+get-childitem | select name,creationtime,lastwritetime
