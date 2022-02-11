@@ -1,0 +1,10 @@
+# Date String convert credit to francishagyard2
+## https://community.spiceworks.com/topic/2232102-poweshell-how-convert-string-to-datetime
+
+set-location "C:\Citrix\profiles\win7"
+write-host
+$file = read-host "Enter filename"
+$Date = read-host "How many months from today (-No)?" 
+
+$DT = (get-date).addmonths($date)
+get-childitem | ? name -eq $file | Set-Itemproperty -name CreationTime -value $DT
